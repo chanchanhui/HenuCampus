@@ -1,2 +1,2 @@
 # HenuCampus
-my first android project
+this is my first android project

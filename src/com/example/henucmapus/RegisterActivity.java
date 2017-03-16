@@ -16,7 +16,7 @@ public class RegisterActivity extends Activity{
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_register);
+		setContentView(R.layout.register_activity);
 		//创建DBHelper实例
 		dbHelper=new DBHelper(this, "info",2);
 		Button BtnReOK=(Button)findViewById(R.id.BtnReOK);
@@ -65,8 +65,8 @@ public class RegisterActivity extends Activity{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent MainActivity=new Intent(RegisterActivity.this,MainActivity.class);
-				startActivity(MainActivity);
+				Intent LogActivity=new Intent(RegisterActivity.this,LogActivity.class);
+				startActivity(LogActivity);
 				
 			}
 		});

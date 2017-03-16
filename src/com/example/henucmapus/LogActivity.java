@@ -18,20 +18,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class MainActivity extends Activity implements OnClickListener {
+public class LogActivity extends Activity implements OnClickListener {
 	private DBHelper dbHelper;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.log_activity);
 		dbHelper = new DBHelper(this, "info", 2);
 		Button Btnregister = (Button) findViewById(R.id.Btnregister);
 		Btnregister.setOnClickListener(this);
 		Button Btnlogin = (Button) findViewById(R.id.Btnlogin);
 		Btnlogin.setOnClickListener(this);
-		Button Btnfragment = (Button) findViewById(R.id.button1);
-		Btnfragment.setOnClickListener(this);
 
 	}
 
@@ -52,29 +50,32 @@ public class MainActivity extends Activity implements OnClickListener {
 				String nameindb = cursor.getString(cursor.getColumnIndex("name"));
 				String passwordindb = cursor.getString(cursor.getColumnIndex("password"));
 				if (name.length() == 0) {
-					Toast.makeText(MainActivity.this, "用户名为空", Toast.LENGTH_SHORT).show();
+					Toast.makeText(LogActivity.this, "用户名为空", Toast.LENGTH_SHORT).show();
 
 				} else if (password.length() == 0) {
-					Toast.makeText(MainActivity.this, "请输入密码", Toast.LENGTH_SHORT).show();
+					Toast.makeText(LogActivity.this, "请输入密码", Toast.LENGTH_SHORT).show();
 
 				} else if (nameindb.equals(name) && passwordindb.equals(password)) {
-					Toast.makeText(MainActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+					Toast.makeText(LogActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
 					Log.d("info", "the name is " + name);
 					Log.d("info", "the passwrod is " + password);
+					//Intent mainActivity =new Intent(this,acActivity)
+					Intent mainActivity = new Intent(LogActivity.this, MainActivity.class);
+					startActivity(mainActivity);
 				} else {
-					Toast.makeText(MainActivity.this, "用户名或者密码错误", Toast.LENGTH_SHORT).show();
+					Toast.makeText(LogActivity.this, "用户名或者密码错误", Toast.LENGTH_SHORT).show();
 
 				}
 			}
 			break;
 		case R.id.Btnregister:
-			Intent RegisterActivity = new Intent(MainActivity.this, RegisterActivity.class);
+			Intent RegisterActivity = new Intent(LogActivity.this, RegisterActivity.class);
 			startActivity(RegisterActivity);
 
 			break;
-		case R.id.button1:
-			Intent acActivity = new Intent(MainActivity.this, acActivity.class);
-			startActivity(acActivity);
+//		case R.id.button1:
+//			Intent MainActivity = new Intent(LogActivity.this, MainActivity.class);
+//			startActivity(MainActivity);
 //			AnotherFragment fragment = new AnotherFragment();
 //			FragmentManager fragmentManager = getFragmentManager();
 //			FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -82,7 +83,7 @@ public class MainActivity extends Activity implements OnClickListener {
 //			transaction.addToBackStack(null);
 //			transaction.commit();
 
-			break;
+//			break;
 		}
 	}
 

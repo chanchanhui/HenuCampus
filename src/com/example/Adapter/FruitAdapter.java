@@ -1,7 +1,11 @@
-package com.example.henucmapus;
+package com.example.Adapter;
 
 import java.security.KeyStore.PrivateKeyEntry;
 import java.util.List;
+
+import com.example.henucmapus.Fruit;
+import com.example.henucmapus.R;
+import com.example.henucmapus.R.id;
 
 import android.content.Context;
 import android.media.Image;

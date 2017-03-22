@@ -3,15 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
-    <RelativeLayout
+     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#F5F5F5"
         >
 
         <ImageView
-            android:id="@+id/back"
+            android:id="@+id/backtoNofi"
             android:layout_width="32dp"
             android:layout_height="32dp"
            android:layout_alignParentLeft="true"
@@ -26,11 +25,21 @@
             android:layout_alignParentRight="true"
             android:src="@drawable/add" />
     </RelativeLayout>
-
-    <ListView
-        android:id="@+id/listview_fruit"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="物品名称"
+        >
+    </TextView>
+ <EditText
+            android:id="@+id/fruitName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入物品名称" />
+ <Button
+        android:id="@+id/Btnsub"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </ListView>
-
+        android:layout_height="wrap_content" 
+        android:text="提交"
+        />
 </LinearLayout>

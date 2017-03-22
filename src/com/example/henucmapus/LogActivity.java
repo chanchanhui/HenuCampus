@@ -1,5 +1,7 @@
 package com.example.henucmapus;
 
+import com.example.DB.DBHelper;
+
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -20,53 +22,63 @@ import android.widget.Toast;
 
 public class LogActivity extends Activity implements OnClickListener {
 	private DBHelper dbHelper;
-
+	Button Btnregister ;
+	Button Btnlogin;
+	EditText NameETextl ;
+	EditText PswordETextrl ;
+	String name = null;
+	String password = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.log_activity);
-		dbHelper = new DBHelper(this, "info", 2);
-		Button Btnregister = (Button) findViewById(R.id.Btnregister);
+		findViewById();
+		dbHelper = new DBHelper(this, "info", 2);	
 		Btnregister.setOnClickListener(this);
-		Button Btnlogin = (Button) findViewById(R.id.Btnlogin);
 		Btnlogin.setOnClickListener(this);
 
 	}
 
 	public void onClick(View v) {
-		EditText NameETextl = (EditText) findViewById(R.id.NameETextr);
-		EditText PswordETextrl = (EditText) findViewById(R.id.PswordETextrl);
-
+		
 		switch (v.getId()) {
 		case R.id.Btnlogin:
-			String name = null;
+			
+			
 			name = NameETextl.getText().toString();
-			String password = null;
 			password = PswordETextrl.getText().toString();
+			
 			SQLiteDatabase db = dbHelper.getReadableDatabase();
 			Cursor cursor = db.query("info", null, null, null, null, null, null);
-			while (cursor.moveToNext()) {
+		//	if(cursor.moveToNext()){
+				//如果一條數據也沒有，提示錯誤
+		//		Toast.makeText(LogActivity.this, "數據庫为空", Toast.LENGTH_SHORT).show();
 
-				String nameindb = cursor.getString(cursor.getColumnIndex("name"));
-				String passwordindb = cursor.getString(cursor.getColumnIndex("password"));
-				if (name.length() == 0) {
-					Toast.makeText(LogActivity.this, "用户名为空", Toast.LENGTH_SHORT).show();
+		//	}else{
+				while (cursor.moveToNext()) {
 
-				} else if (password.length() == 0) {
-					Toast.makeText(LogActivity.this, "请输入密码", Toast.LENGTH_SHORT).show();
+					String nameindb = cursor.getString(cursor.getColumnIndex("name"));
+					String passwordindb = cursor.getString(cursor.getColumnIndex("password"));
+					if (name.length() == 0) {
+						Toast.makeText(LogActivity.this, "用户名为空", Toast.LENGTH_SHORT).show();
 
-				} else if (nameindb.equals(name) && passwordindb.equals(password)) {
-					Toast.makeText(LogActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-					Log.d("info", "the name is " + name);
-					Log.d("info", "the passwrod is " + password);
-					//Intent mainActivity =new Intent(this,acActivity)
-					Intent mainActivity = new Intent(LogActivity.this, MainActivity.class);
-					startActivity(mainActivity);
-				} else {
-					Toast.makeText(LogActivity.this, "用户名或者密码错误", Toast.LENGTH_SHORT).show();
+					} else if (password.length() == 0) {
+						Toast.makeText(LogActivity.this, "请输入密码", Toast.LENGTH_SHORT).show();
 
+					} else if (nameindb.equals(name) && passwordindb.equals(password)) {
+						Toast.makeText(LogActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+						Log.d("info", "the name is " + name);
+						Log.d("info", "the passwrod is " + password);
+						//Intent mainActivity =new Intent(this,acActivity)
+						Intent mainActivity = new Intent(LogActivity.this, MainActivity.class);
+						startActivity(mainActivity);
+					} else {
+						Toast.makeText(LogActivity.this, "用户名或者密码错误", Toast.LENGTH_SHORT).show();
+
+					}
 				}
-			}
+			
+			
 			break;
 		case R.id.Btnregister:
 			Intent RegisterActivity = new Intent(LogActivity.this, RegisterActivity.class);
@@ -104,6 +116,13 @@ public class LogActivity extends Activity implements OnClickListener {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	private void findViewById() {
+		Btnregister = (Button) findViewById(R.id.Btnregister);
+		Btnlogin = (Button) findViewById(R.id.Btnlogin);
+		NameETextl = (EditText) findViewById(R.id.NameETextr);
+		PswordETextrl = (EditText) findViewById(R.id.PswordETextrl);
+
 	}
 
 }

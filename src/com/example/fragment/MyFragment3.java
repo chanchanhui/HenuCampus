@@ -1,4 +1,7 @@
-package com.example.henucmapus;
+package com.example.fragment;
+
+import com.example.henucmapus.R;
+import com.example.henucmapus.R.layout;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
